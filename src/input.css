@@ -4,48 +4,48 @@
 
 @font-face {
   font-family: 'alba_matter';
-  src: url('/public/fonts/alba.matter-webfont.woff2') format('woff2'),
-       url('/public/fonts/alba.matter-webfont.woff') format('woff');
+  src: url('./fonts/alba.matter-webfont.woff2') format('woff2'),
+       url('./fonts/alba.matter-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'tekoregular';
-  src: url('/public/fonts/teko-regular-webfont.woff2') format('woff2'),
-       url('/public/fonts/teko-regular-webfont.woff') format('woff');
+  src: url('./fonts/teko-regular-webfont.woff2') format('woff2'),
+       url('./fonts/teko-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'tekolight';
-  src: url('/public/fonts/teko-light-webfont.woff2') format('woff2'),
-       url('/public/fonts/teko-light-webfont.woff') format('woff');
+  src: url('./fonts/teko-light-webfont.woff2') format('woff2'),
+       url('./fonts/teko-light-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'tekomedium';
-  src: url('/public/fonts/teko-medium-webfont.woff2') format('woff2'),
-       url('/public/fonts/teko-medium-webfont.woff') format('woff');
+  src: url('./fonts/teko-medium-webfont.woff2') format('woff2'),
+       url('./fonts/teko-medium-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'tekosemibold';
-  src: url('/public/fonts/teko-semibold-webfont.woff2') format('woff2'),
-       url('/public/fonts/teko-semibold-webfont.woff') format('woff');
+  src: url('./fonts/teko-semibold-webfont.woff2') format('woff2'),
+       url('./fonts/teko-semibold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'tekobold';
-  src: url('/public/fonts/teko-bold-webfont.woff2') format('woff2'),
-       url('/public/fonts/teko-bold-webfont.woff') format('woff');
+  src: url('./fonts/teko-bold-webfont.woff2') format('woff2'),
+       url('./fonts/teko-bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
