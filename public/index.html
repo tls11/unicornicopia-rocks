@@ -1,115 +1,76 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./output.css" rel="stylesheet" />
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-    ></script>
-    <title>Unicornicopia</title>
-  </head>
-  <body class="bg-black font-teko text-white">
-    <div
-      class="m-auto grid max-w-7xl grid-cols-1 justify-items-center overflow-visible lg:grid-cols-3"
-    >
-      <img
-        class="w-48 md:hidden lg:absolute lg:-top-8 lg:left-[26.5%] lg:inline-block lg:w-1/12 lg:min-w-56"
-        src="./images/corn/horseHeadLogo.png"
-        alt="unicorn head logo"
-      />
-      <header class="w-full md:mt-7 lg:col-span-3">
-        <nav>
-          <ul
-            class="flex flex-col items-center font-alba text-4xl md:flex-row md:justify-around lg:justify-end lg:gap-10"
-          >
-            <li><a href="#" class="">news</a></li>
-            <li><a href="#">about</a></li>
-            <li><a href="#">shows</a></li>
-            <li><a href="#">videos</a></li>
-            <li class=""><a href="#">contact</a></li>
-          </ul>
-        </nav>
-      </header>
-
-      <div
-        class="my-1 mt-3 h-2 w-screen bg-cornorange md:mt-12 lg:col-span-3 lg:mt-5"
-      ></div>
-      <div class="mb-3 h-2 w-screen bg-cornpurple lg:col-span-3"></div>
-      <img
-        class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-3/12 lg:min-w-96"
-        src="./images/corn/wonkaLogo.png"
-        alt="unicornicopia wonka logo"
-      />
-      <img
-        class="hidden max-w-2xl lg:absolute lg:left-0 lg:top-36 lg:inline-block lg:w-6/12"
-        src="./images/corn/theGuyz.png"
-        alt="the guys in the band"
-      />
-      <img
-        class="mb-8 self-center lg:col-span-2 lg:col-start-2 lg:justify-self-end"
-        src="./images/corn/bandOnStage.png"
-        alt="band on stage"
-      />
-
-      <p
-        class="w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl"
-      >
-        Unicornicopia is a Bay Area grunge-funk-metal rock band who drink a lot
-        of whiskey and quote Wayne's World too much. We're available for bar
-        gigs, state fairs, farmers markets and bah mitzvahs.
-      </p>
-      <p
-        class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl"
-      >
-        For more information see the links (above). Socials below (duh).
-      </p>
-      <section class="lg:col-start-3 lg:min-w-[352px] lg:justify-self-end">
-        <div class="my-8 flex justify-center gap-2">
-          <a href="https://www.youtube.com/@unicornicopia1330" target="_blank">
-            <img
-              src="./images/social-logos/youtube.png"
-              alt="youtube logo"
-              class="h-16 w-16"
-            />
-          </a>
-          <a
-            href="https://music.amazon.com/albums/B08CRYS7TW?ref=dm_sh_8CoYSkoE1pUpo9wdLYYnISGhW"
-            target="_blank"
-          >
-            <img
-              src="./images/social-logos/amus.png"
-              alt="amazon logo"
-              class="h-16 w-16"
-            />
-          </a>
-          <a
-            href="https://open.spotify.com/artist/6U9cWuYVr1KAsQSVUq3ivl?si=QeAvPG0xSBa2xsBqVDuB1A"
-            target="_blank"
-          >
-            <img
-              src="./images/social-logos/spotify.png"
-              alt="spotify logo"
-              class="h-16 w-16"
-            />
-          </a>
-          <a href="https://www.facebook.com/unicornicopiaSF" target="_blank">
-            <img
-              src="./images/social-logos/fbook.png"
-              alt="facebook logo"
-              class="h-16 w-16"
-            />
-          </a>
-          <a href="https://www.instagram.com/unicornicopiasf" target="_blank">
-            <img
-              src="./images/social-logos/gram.png"
-              alt="instagram logo"
-              class="h-16 w-16 scale-[1.14]"
-            />
-          </a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="./output.css" rel="stylesheet" />
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <title>Unicornicopia</title>
+    </head>
+    <body class="bg-black font-teko text-white">
+        <div class="m-auto grid max-w-7xl grid-cols-1 justify-items-center overflow-visible lg:grid-cols-3">
+            <a href="/"><img class="w-48 md:hidden lg:absolute lg:-top-8 lg:left-[26.5%] lg:inline-block lg:w-1/12 lg:min-w-56" src="./images/corn/horseHeadLogo.png" alt="unicorn head logo" /></a>
+            <header class="w-full md:mt-7 lg:col-span-3">
+                <nav>
+                    <ul class="flex flex-col items-center font-alba text-4xl md:flex-row md:justify-around lg:justify-end lg:gap-10">
+                        <li><a href="#news" class="">news</a></li>
+                        <li><a href="#about">about</a></li>
+                        <li><a href="#shows">shows</a></li>
+                        <li><a href="#videos">videos</a></li>
+                        <li><a href="mailto:unicornicopiasf@gmail.com">contact</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <div class="my-1 mt-3 h-2 w-screen bg-cornorange md:mt-12 lg:col-span-3 lg:mt-5"></div>
+            <div class="mb-3 h-2 w-screen bg-cornpurple lg:col-span-3"></div>
+            <a href="/"><img class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-3/12 lg:min-w-96" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
+            <img class="hidden max-w-2xl lg:absolute lg:left-0 lg:top-36 lg:inline-block lg:w-6/12" src="./images/corn/theGuyz.png" alt="the guys in the band" />
+            <!-- ------------- -->
+            <div x-data="{page: location.hash}" @hashchange.window="page = location.hash" class="lg:col-span-2 lg:col-start-2">
+                <div x-show="page === ''" class="grid">
+                    <img class="mb-8 self-center lg:col-span-2 lg:col-start-2 lg:justify-self-end" src="./images/corn/bandOnStage.png" alt="band on stage" />
+                    <p class="w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Unicornicopia is a Bay Area grunge-funk-metal rock band who drink a lot of whiskey and quote Wayne's World too much. We're available for bar gigs, state fairs, farmers markets and bah mitzvahs.</p>
+                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">For more information see the links (above). Socials below (duh).</p>
+                    <section class="lg:col-start-3 lg:min-w-[352px] lg:justify-self-end">
+                        <div class="my-8 flex justify-center gap-2">
+                            <a href="https://www.youtube.com/@unicornicopia1330" target="_blank">
+                                <img src="./images/social-logos/youtube.png" alt="youtube logo" class="h-16 w-16" />
+                            </a>
+                            <a href="https://music.amazon.com/albums/B08CRYS7TW?ref=dm_sh_8CoYSkoE1pUpo9wdLYYnISGhW" target="_blank">
+                                <img src="./images/social-logos/amus.png" alt="amazon logo" class="h-16 w-16" />
+                            </a>
+                            <a href="https://open.spotify.com/artist/6U9cWuYVr1KAsQSVUq3ivl?si=QeAvPG0xSBa2xsBqVDuB1A" target="_blank">
+                                <img src="./images/social-logos/spotify.png" alt="spotify logo" class="h-16 w-16" />
+                            </a>
+                            <a href="https://www.facebook.com/unicornicopiaSF" target="_blank">
+                                <img src="./images/social-logos/fbook.png" alt="facebook logo" class="h-16 w-16" />
+                            </a>
+                            <a href="https://www.instagram.com/unicornicopiasf" target="_blank">
+                                <img src="./images/social-logos/gram.png" alt="instagram logo" class="h-16 w-16 scale-[1.14]" />
+                            </a>
+                        </div>
+                    </section>
+                </div>
+                <div x-show="page === '#news'" class="grid">
+                    <img src="./images/news/goodNews.jpg" alt="farnsworth good news!" class="" />
+                </div>
+                <div x-show="page === '#about'" class="grid">
+                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Woooooo!</p>
+                    <div>
+                        <img src="./images/corn/proCole.webp" alt="coleman" class="rounded-full" />
+                    </div>
+                    <!-- <img src="./images/corn/proChris.png" alt="rebbert" class=""/> -->
+                    <!-- <img src="./images/corn/proTheo.jpg" alt="theo" class=""/> -->
+                    <!-- <img src="./images/corn/proYou.png" alt="you?" class=""/> -->
+                </div>
+                <div x-show="page === '#shows'" class="grid">
+                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Good things are coming....good things</p>
+                </div>
+                <div x-show="page === '#videos'" class="grid">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/nuh01mBMOtg?si=V2TNiAmn_i1V6xgL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <!-- <div x-show="page === '#contact'"></div> -->
+            </div>
         </div>
-      </section>
-    </div>
-  </body>
+    </body>
 </html>
