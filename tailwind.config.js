@@ -26,5 +26,31 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.shape-outside-none': {
+          'shape-outside': 'none',
+        },
+        '.shape-outside-circle': {
+          'shape-outside': 'circle(50%)',
+        },
+        '.shape-outside-ellipse': {
+          'shape-outside': 'ellipse(50% 50%)',
+        },
+        '.shape-outside-inset': {
+          'shape-outside': 'inset(10px 10px 10px 10px)',
+        },
+        '.shape-outside-polygon': {
+          'shape-outside': 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
+        },
+        '.shape-outside-url': {
+          'shape-outside': 'url(path/to/image.png)',
+        },
+        // Add more custom shapes as needed
+      };
+
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    }
+  ],
 }
