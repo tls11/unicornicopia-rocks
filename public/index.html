@@ -13,7 +13,7 @@
             <header class="w-full md:mt-7 lg:col-span-3">
                 <nav>
                     <ul class="flex flex-col items-center font-alba text-4xl md:flex-row md:justify-around lg:justify-end lg:gap-10">
-                        <li><a href="#news" class="">news</a></li>
+                        <li><a href="#news">news</a></li>
                         <li><a href="#about">about</a></li>
                         <li><a href="#shows">shows</a></li>
                         <li><a href="#videos">videos</a></li>
@@ -22,11 +22,11 @@
                 </nav>
             </header>
             <div class="my-1 mt-3 h-2 w-screen bg-cornorange md:mt-12 lg:col-span-3 lg:mt-5"></div>
-            <div class="mb-3 h-2 w-screen bg-cornpurple lg:col-span-3"></div>
-            <a href="/"><img class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-3/12 lg:min-w-96" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
-            <img class="hidden max-w-2xl lg:absolute lg:left-0 lg:top-36 lg:inline-block lg:w-6/12" src="./images/corn/theGuyz.png" alt="the guys in the band" />
+            <div class="mb-3 h-2 w-screen bg-cornpurple md:mb-24 lg:col-span-3 lg:mb-3"></div>
+            <a href="/" class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-3/12 lg:min-w-96"><img class="" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
+            <img class="hidden max-w-2xl lg:absolute lg:left-0 lg:top-36 lg:inline-block" src="./images/corn/theGuyz.png" alt="the guys in the band" />
             <!-- ------------- -->
-            <div x-data="{page: location.hash}" @hashchange.window="page = location.hash" class="lg:col-span-2 lg:col-start-2">
+            <div x-data="{page: location.hash}" @hashchange.window="page = location.hash" class="max-w-[90%] lg:col-span-2 lg:col-start-2 lg:max-w-full">
                 <div x-show="page === ''" class="grid">
                     <img class="mb-8 self-center lg:col-span-2 lg:col-start-2 lg:justify-self-end" src="./images/corn/bandOnStage.png" alt="band on stage" />
                     <p class="w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Unicornicopia is a Bay Area grunge-funk-metal rock band who drink a lot of whiskey and quote Wayne's World too much. We're available for bar gigs, state fairs, farmers markets and bah mitzvahs.</p>
@@ -51,28 +51,45 @@
                         </div>
                     </section>
                 </div>
-                <div x-show="page === '#news'" class="grid">
+                <div x-show="page === '#news'" class="grid"> <!-- news -->
                     <img src="./images/news/goodNews.jpg" alt="farnsworth good news!" class="" />
                 </div>
-                <div x-show="page === '#about'" class="grid">
-                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Big Gulps, huh?</p>
-                    <div class="flex">
-                        <img class="w-72 h-72 rounded-full object-cover border-8 border-white" src="./images/corn/proCole.webp" alt="coleman" class="rounded-full" />
-                        <span>
-                            <span class="text-4xl">Cubic Zirconia Cole Musselamn</span>
-                            <p class="text-2xl"></p>
-                            <p class="text-2xl"></p>
-                            <p class="text-2xl"></p>
+                <div x-show="page === '#about'" class="grid grid-cols-1 gap-16"> <!-- about -->
+                    <h1 class="my-3 text-5xl md:my-8">Unicornicopia is...</h1>
+                    <div class="flex flex-col items-center gap-4 md:block">
+                        <img class="float-left mr-4 h-56 w-56 rounded-full border-8 border-white object-cover shape-outside-circle" src="./images/corn/proCole.webp" alt="coleman" class="rounded-full" />
+                        <span class="flex flex-col items-center md:block">
+                            <span class="text-4xl text-gray-400">Cubic Zirconia Cole Musselamn</span>
+                            <p class="text-2xl">Big Gulps, huh? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit error quaerat, odit aliquid temporibus soluta nemo quam non ullam voluptas exercitationem adipisci ipsum sequi totam dicta, fugit quidem quo!</p>
                         </span>
                     </div>
-                    <!-- <img src="./images/corn/proChris.png" alt="rebbert" class=""/> -->
-                    <!-- <img src="./images/corn/proTheo.jpg" alt="theo" class=""/> -->
-                    <!-- <img src="./images/corn/proYou.png" alt="you?" class=""/> -->
+                    <div class="flex flex-col items-center gap-4 md:block">
+                        <img class="float-left mr-4 h-56 w-56 rounded-full border-8 border-white object-cover shape-outside-circle" src="./images/corn/proChris.png" alt="rebbert" class="rounded-full" />
+                        <span class="flex flex-col items-center md:block">
+                            <span class="text-4xl text-gray-400">Cautious Chris Rebbert</span>
+                            <p class="text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit error quaerat, odit aliquid temporibus soluta nemo quam non ullam voluptas exercitationem adipisci ipsum sequi totam dicta, fugit quidem quo!</p>
+                        </span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 md:block">
+                        <img class="float-left mr-4 h-56 w-56 rounded-full border-8 border-white object-cover shape-outside-circle" src="./images/corn/proTheo.jpg" alt="theo" class="rounded-full" />
+                        <span class="flex flex-col items-center md:block">
+                            <span class="text-4xl text-gray-400">Theo the Thunder Spielman</span>
+                            <p class="text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit error quaerat, odit aliquid temporibus soluta nemo quam non ullam voluptas exercitationem adipisci ipsum sequi totam dicta, fugit quidem quo!</p>
+                        </span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 md:block">
+                        <img class="float-left mr-4 h-56 w-56 rounded-full border-8 border-white object-cover shape-outside-circle" src="./images/corn/proYou.png" alt="you?" class="rounded-full" />
+                        <span class="flex flex-col items-center md:block">
+                            <span class="text-4xl text-gray-400">You?</span>
+                            <p class="text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit error quaerat, odit aliquid temporibus soluta nemo quam non ullam voluptas exercitationem adipisci ipsum sequi totam dicta, fugit quidem quo!</p>
+                        </span>
+                    </div>
                 </div>
-                <div x-show="page === '#shows'" class="grid">
-                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Good things are coming....good things</p>
+                <div x-show="page === '#shows'" class="grid"> <!-- shows -->
+                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">good things are coming....</p>
+                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">good things</p>
                 </div>
-                <div x-show="page === '#videos'" class="grid">
+                <div x-show="page === '#videos'" class="grid"> <!-- videos -->
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/nuh01mBMOtg?si=V2TNiAmn_i1V6xgL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
                 <!-- <div x-show="page === '#contact'"></div> -->
