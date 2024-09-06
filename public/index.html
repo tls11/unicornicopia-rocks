@@ -23,7 +23,7 @@
             <div class="mb-3 h-2 w-screen bg-cornpurple md:mb-24 lg:mb-3"></div>
             <a href="/" class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-[396.5px]"><img class="" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
             <div x-data="{page: location.hash}" @hashchange.window="page = location.hash" class="grid max-w-[90%] lg:max-w-full lg:grid-cols-12">
-                <img class="sticky top-0 hidden lg:col-span-5 lg:col-start-1 lg:inline-block" src="./images/corn/theGuyz.png" alt="the guys in the band" />
+                <img class="sticky top-0 -z-10 hidden max-w-2xl lg:col-span-5 lg:col-start-1 lg:inline-block" src="./images/corn/theGuyz.png" alt="the guys in the band" />
                 <div x-show="page === ''" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
                     <!-- home -->
                     <img class="mb-8 lg:col-span-2 lg:col-start-2 lg:justify-self-end" src="./images/corn/bandOnStage.png" alt="band on stage" />
@@ -55,7 +55,7 @@
                 </div>
                 <div x-show="page === '#about'" class="grid gap-16 lg:col-span-7 lg:col-start-6">
                     <!-- about -->
-                    <h1 class="my-3 text-5xl md:my-8 ">Unicornicopia is...</h1>
+                    <h1 class="my-3 text-5xl md:my-8">Unicornicopia is...</h1>
                     <div class="flex flex-col items-center gap-4 md:block">
                         <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-gray-800 object-cover shape-outside-circle" src="./images/corn/proColeG.jpg" alt="coleman" />
                         <span class="flex flex-col items-center md:block">
