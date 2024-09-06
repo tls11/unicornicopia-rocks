@@ -7,28 +7,26 @@
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <title>Unicornicopia</title>
     </head>
-    <body class="bg-black font-teko text-white">
-        <div class="m-auto grid max-w-7xl grid-cols-1 justify-items-center overflow-visible lg:grid-cols-3">
-            <a href="/"><img class="w-52 md:hidden lg:absolute lg:-top-8 lg:left-[26.5%] lg:inline-block lg:w-1/12 lg:min-w-56" src="./images/corn/horseHeadLogo.png" alt="unicorn head logo" /></a>
-            <header class="w-full md:mt-7 lg:col-span-3">
-                <nav>
-                    <ul class="flex flex-col items-center font-alba text-4xl md:flex-row md:justify-around lg:justify-end lg:gap-10">
-                        <li><a href="#news">news</a></li>
-                        <li><a href="#about">about</a></li>
-                        <li><a href="#shows">shows</a></li>
-                        <li><a href="#videos">videos</a></li>
-                        <li><a href="mailto:unicornicopiasf@gmail.com" target="_blank">contact</a></li>
-                    </ul>
+    <body class="bg-black font-teko text-white antialiased">
+        <div class="flex flex-col items-center justify-center overflow-visible">
+            <a href="/"><img class="w-52 md:hidden lg:absolute lg:-top-8 lg:left-[420px] lg:inline-block lg:min-w-56" src="./images/corn/horseHeadLogo.png" alt="unicorn head logo" /></a>
+            <header class="w-full md:mt-7">
+                <nav class="hidden flex-col items-center font-alba text-4xl md:flex md:flex-row md:justify-around lg:justify-end lg:gap-10">
+                    <a href="#news">news</a>
+                    <a href="#about">about</a>
+                    <a href="#shows">shows</a>
+                    <a href="#videos">videos</a>
+                    <a href="mailto:unicornicopiasf@gmail.com" target="_blank" class="lg:mr-11">contact</a>
                 </nav>
             </header>
-            <div class="my-1 mt-3 h-2 w-screen bg-cornorange md:mt-12 lg:col-span-3 lg:mt-5"></div>
-            <div class="mb-3 h-2 w-screen bg-cornpurple md:mb-24 lg:col-span-3 lg:mb-3"></div>
-            <a href="/" class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-3/12 lg:min-w-96"><img class="" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
-            <img class="hidden max-w-2xl lg:absolute lg:left-0 lg:top-36 lg:inline-block" src="./images/corn/theGuyz.png" alt="the guys in the band" />
-            <!-- ------------- -->
-            <div x-data="{page: location.hash}" @hashchange.window="page = location.hash" class="max-w-[90%] lg:col-span-2 lg:col-start-2 lg:max-w-full">
-                <div x-show="page === ''" class="grid justify-items-center"> <!-- home -->
-                    <img class="mb-8 self-center lg:col-span-2 lg:col-start-2 lg:justify-self-end" src="./images/corn/bandOnStage.png" alt="band on stage" />
+            <div class="mb-1 mt-3 h-2 w-screen bg-cornorange md:mt-12 lg:mt-5"></div>
+            <div class="mb-3 h-2 w-screen bg-cornpurple md:mb-24 lg:mb-3"></div>
+            <a href="/" class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-[396.5px]"><img class="" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
+            <div x-data="{page: location.hash}" @hashchange.window="page = location.hash" class="grid max-w-[90%] lg:max-w-full lg:grid-cols-12">
+                <img class="sticky top-0 hidden lg:col-span-5 lg:col-start-1 lg:inline-block" src="./images/corn/theGuyz.png" alt="the guys in the band" />
+                <div x-show="page === ''" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
+                    <!-- home -->
+                    <img class="mb-8 lg:col-span-2 lg:col-start-2 lg:justify-self-end" src="./images/corn/bandOnStage.png" alt="band on stage" />
                     <p class="w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Unicornicopia is a Bay Area grunge-funk-metal rock band who drink a lot of whiskey and quote Wayne's World too much. We're available for bar gigs, state fairs, farmers markets and bah mitzvahs.</p>
                     <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">For more information see the links (above). Socials below (duh).</p>
                     <section class="lg:col-start-3 lg:min-w-[352px] lg:justify-self-end">
@@ -51,45 +49,49 @@
                         </div>
                     </section>
                 </div>
-                <div x-show="page === '#news'" class="grid"> <!-- news -->
-                    <img class="w-3/4 justify-self-center lg:justify-self-end" src="./images/news/goodNews.jpg" alt="farnsworth good news!" class="" />
+                <div x-show="page === '#news'" class="grid lg:col-span-6 lg:col-start-6">
+                    <!-- news -->
+                    <img class="w-3/4 justify-self-center lg:justify-self-end" src="./images/news/goodNews.jpg" alt="farnsworth good news!" />
                 </div>
-                <div x-show="page === '#about'" class="grid grid-cols-1 gap-16"> <!-- about -->
-                    <h1 class="my-3 text-5xl md:my-8">Unicornicopia is...</h1>
+                <div x-show="page === '#about'" class="grid gap-16 lg:col-span-7 lg:col-start-6">
+                    <!-- about -->
+                    <h1 class="my-3 text-5xl md:my-8 ">Unicornicopia is...</h1>
                     <div class="flex flex-col items-center gap-4 md:block">
-                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-white object-cover shape-outside-circle" src="./images/corn/proCole.webp" alt="coleman" class="rounded-full" />
+                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-gray-800 object-cover shape-outside-circle" src="./images/corn/proColeG.jpg" alt="coleman" />
                         <span class="flex flex-col items-center md:block">
                             <span class="text-4xl text-gray-400">Cubic Zirconia Cole Musselamn</span>
                             <p class="text-2xl">Big Gulps, huh? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit error quaerat, odit aliquid temporibus soluta nemo quam non ullam voluptas exercitationem adipisci ipsum sequi totam dicta, fugit quidem quo!</p>
                         </span>
                     </div>
                     <div class="flex flex-col items-center gap-4 md:block">
-                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-white object-cover shape-outside-circle" src="./images/corn/proChris.png" alt="rebbert" class="rounded-full" />
+                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-gray-800 object-cover object-top shape-outside-circle" src="./images/corn/proChrisG.jpg" alt="rebbert" />
                         <span class="flex flex-col items-center md:block">
                             <span class="text-4xl text-gray-400">Cautious Chris Rebbert</span>
                             <p class="text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit error quaerat, odit aliquid temporibus soluta nemo quam non ullam voluptas exercitationem adipisci ipsum sequi totam dicta, fugit quidem quo!</p>
                         </span>
                     </div>
                     <div class="flex flex-col items-center gap-4 md:block">
-                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-white object-cover shape-outside-circle" src="./images/corn/proTheo.jpg" alt="theo" class="rounded-full" />
+                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-gray-800 object-cover shape-outside-circle" src="./images/corn/proTheo.jpg" alt="theo" />
                         <span class="flex flex-col items-center md:block">
                             <span class="text-4xl text-gray-400">Theo the Thunder Spielman</span>
                             <p class="text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit error quaerat, odit aliquid temporibus soluta nemo quam non ullam voluptas exercitationem adipisci ipsum sequi totam dicta, fugit quidem quo!</p>
                         </span>
                     </div>
-                    <div class="flex flex-col items-center gap-4 md:block">
-                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-white object-cover shape-outside-circle" src="./images/corn/proYou.png" alt="you?" class="rounded-full" />
+                    <div class="mb-10 flex flex-col items-center gap-4 md:block">
+                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-gray-800 object-cover object-top shape-outside-circle" src="./images/corn/proYou.png" alt="you?" />
                         <span class="flex flex-col items-center md:block">
                             <span class="text-4xl text-gray-400">You?</span>
                             <p class="text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem sit error quaerat, odit aliquid temporibus soluta nemo quam non ullam voluptas exercitationem adipisci ipsum sequi totam dicta, fugit quidem quo!</p>
                         </span>
                     </div>
                 </div>
-                <div x-show="page === '#shows'" class="grid"> <!-- shows -->
-                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">good things are coming....</p>
-                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">good things</p>
+                <div x-show="page === '#shows'" class="grid lg:col-span-6 lg:col-start-6 lg:grid-rows-[min-content_min-content_min-content]">
+                    <!-- shows -->
+                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:mb-1 lg:justify-self-end lg:text-3xl">good things are coming....</p>
+                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:justify-self-end lg:text-3xl">good things</p>
                 </div>
-                <div x-show="page === '#videos'" class="grid"> <!-- videos -->
+                <div x-show="page === '#videos'" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
+                    <!-- videos -->
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/nuh01mBMOtg?si=V2TNiAmn_i1V6xgL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
                 <!-- <div x-show="page === '#contact'"></div> -->

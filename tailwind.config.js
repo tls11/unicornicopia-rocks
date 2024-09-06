@@ -26,6 +26,9 @@ module.exports = {
       }
     },
   },
+  variants: {
+    
+  },
   plugins: [
     function({ addUtilities }) {
       const newUtilities = {
