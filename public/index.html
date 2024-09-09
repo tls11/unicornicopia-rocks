@@ -47,7 +47,7 @@
             <a href="/" class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-[396.5px]"><img class="" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
             <div x-data="{page: location.hash}" @hashchange.window="page = location.hash" class="grid max-w-[90%] lg:max-w-full lg:grid-cols-12">
                 <img class="sticky top-0 -z-10 hidden max-w-2xl lg:col-span-4 lg:col-start-1 lg:inline-block" src="./images/corn/theGuyz.png" alt="the guys in the band" />
-                <div x-show="page === ''" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
+                <div x-cloak x-show="page === ''" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
                     <!-- home -->
                     <img class="mb-8 lg:col-span-2 lg:col-start-2 lg:justify-self-end" src="./images/corn/bandOnStage.png" alt="band on stage" />
                     <p class="w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Unicornicopia is a Bay Area grunge-funk-metal rock band who drink a lot of whiskey and quote Wayne's World too much. We're available for bar gigs, state fairs, farmers markets and bah mitzvahs.</p>
@@ -72,11 +72,11 @@
                         </div>
                     </section>
                 </div>
-                <div x-show="page === '#news'" class="grid lg:col-span-6 lg:col-start-6">
+                <div x-cloak x-show="page === '#news'" class="grid lg:col-span-6 lg:col-start-6">
                     <!-- news -->
                     <img class="w-3/4 justify-self-center lg:justify-self-end" src="./images/news/goodNews.jpg" alt="farnsworth good news!" />
                 </div>
-                <div x-show="page === '#about'" class="grid gap-16 lg:col-span-7 lg:col-start-5">
+                <div x-cloak x-show="page === '#about'" class="grid gap-16 lg:col-span-7 lg:col-start-5">
                     <!-- about -->
                     <h1 class="left-[660.5px] my-3 text-5xl md:my-8 lg:absolute">Unicornicopia is...</h1>
                     <div class="flex flex-col items-center gap-4 md:block lg:mt-44">
@@ -108,16 +108,15 @@
                         </span>
                     </div>
                 </div>
-                <div x-show="page === '#shows'" class="grid lg:col-span-6 lg:col-start-6 lg:grid-rows-[min-content_min-content_min-content]">
+                <div x-cloak x-show="page === '#shows'" class="grid lg:col-span-6 lg:col-start-6 lg:grid-rows-[min-content_min-content_min-content]">
                     <!-- shows -->
                     <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:mb-1 lg:justify-self-end lg:text-3xl">good things are coming....</p>
                     <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:justify-self-end lg:text-3xl">good things</p>
                 </div>
-                <div x-show="page === '#videos'" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
+                <div x-cloak x-show="page === '#videos'" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
                     <!-- videos -->
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/nuh01mBMOtg?si=V2TNiAmn_i1V6xgL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
-                <!-- <div x-show="page === '#contact'"></div> -->
             </div>
         </div>
     </body>
