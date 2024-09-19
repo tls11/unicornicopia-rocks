@@ -19,6 +19,7 @@
                 <header x-data="{ mobileMenuIsOpen: false }" @click.away="mobileMenuIsOpen = false" class="w-full">
                     <!-- Desktop Menu -->
                     <nav class="hidden items-center font-alba text-4xl md:flex md:justify-around lg:justify-end lg:gap-10">
+                        <a href="/">home</a>
                         <a href="#news">news</a>
                         <a href="#about">about</a>
                         <a href="#shows">shows</a>
@@ -36,6 +37,7 @@
                     </button>
                     <!-- Mobile Menu -->
                     <nav x-cloak x-show="mobileMenuIsOpen" x-transition:enter="transition motion-reduce:transition-none ease-out duration-300" x-transition:enter-start="-translate-y-full" x-transition:enter-end="translate-y-0" x-transition:leave="transition motion-reduce:transition-none ease-out duration-300" x-transition:leave-start="translate-y-0" x-transition:leave-end="-translate-y-full" id="mobileMenu" class="fixed inset-x-0 top-0 z-10 flex max-h-svh flex-col items-center divide-y divide-cornorange overflow-y-auto rounded-b-xl border-b border-cornpurple bg-gray-950 px-6 pb-6 pt-20 font-alba text-4xl md:hidden">
+                        <a href="/">home</a>
                         <a href="#news">news</a>
                         <a href="#about">about</a>
                         <a href="#shows">shows</a>
