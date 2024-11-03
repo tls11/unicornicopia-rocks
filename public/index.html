@@ -117,14 +117,19 @@
                     <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:mb-1 lg:justify-self-end lg:text-3xl">good things are coming....</p>
                     <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:justify-self-end lg:text-3xl">good things</p>
                 </div>
-                <div x-cloak x-show="page === '#videos'" x-data="{
+                <div
+                    x-cloak
+                    x-show="page === '#videos'"
+                    x-data="{
                     embedLinks:[
                     'https://www.youtube.com/embed/bmxkZgitBTs?si=pB-HJoYD3Q947tWJ',
                     'https://www.youtube.com/embed/GYFIILo-GxU?si=CDXRO10AhjAzGbIA',
                     'https://www.youtube.com/embed/zo8sew2qX9Y?si=wpdYywdxrNStoj65',
                     'https://www.youtube.com/embed/kfkXIaW5jt0?si=oYR3WPJ8QMdfYH-U',
                 ] 
-                }" class="grid justify-items-center gap-y-16 lg:col-span-6 lg:col-start-6">
+                }"
+                    class="grid justify-items-center gap-y-16 lg:col-span-6 lg:col-start-6"
+                >
                     <template x-for="embedLink in embedLinks">
                         <iframe width="560" height="315" :src="embedLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </template>
