@@ -126,14 +126,14 @@
                     'https://www.youtube.com/embed/bmxkZgitBTs?si=pB-HJoYD3Q947tWJ',
                     'https://www.youtube.com/embed/GYFIILo-GxU?si=CDXRO10AhjAzGbIA',
                     'https://www.youtube.com/embed/zo8sew2qX9Y?si=wpdYywdxrNStoj65',
-                    'https://www.youtube.com/embed/kfkXIIaW5jt0?si=oYR3WPJ8QMdfYH-U',
+                    'https://www.youtube.com/embed/kfkXIIaW5jt?si=oYR3WPJ8QMdfYH-U',
                 ] 
                 }"
                     class="grid justify-items-center gap-y-16 lg:col-span-6 lg:col-start-6"
                 >
                 <!-- videos -->
                     <template x-for="embedLink in embedLinks">
-                        <div class="aspect-video w-full max-w-[560px]">
+                        <div class="aspect-video w-full max-w-sm md:max-w-lg lg:max-w-[560px]">
                             <iframe :src="embedLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="h-full w-full"></iframe>
                         </div>
                     </template>
