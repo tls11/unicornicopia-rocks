@@ -15,11 +15,11 @@
     <body class="bg-black font-teko text-white antialiased">
         <div class="flex flex-col items-center justify-center overflow-visible">
             <div class="sticky top-0 bg-black md:static">
-                <a href="/" class="inline-block"><img class="-mb-4 ml-4 mt-1 w-12 md:hidden lg:absolute lg:-top-8 lg:left-[420px] lg:mb-0 lg:ml-0 lg:inline-block lg:min-w-56" src="./images/corn/horseHeadLogo.png" alt="unicorn head logo" /></a>
+                <a href="#home" class="inline-block"><img class="-mb-4 ml-4 mt-1 w-12 md:hidden lg:absolute lg:-top-8 lg:left-[420px] lg:mb-0 lg:ml-0 lg:inline-block lg:min-w-56" src="./images/corn/horseHeadLogo.png" alt="unicorn head logo" /></a>
                 <header x-data="{ mobileMenuIsOpen: false }" @click.away="mobileMenuIsOpen = false" class="w-full">
                     <!-- Desktop Menu -->
                     <nav class="hidden items-center font-alba text-4xl md:flex md:justify-around lg:justify-end lg:gap-10">
-                        <a href="/">home</a>
+                        <a href="#home">home</a>
                         <a href="#news">news</a>
                         <a href="#about">about</a>
                         <a href="#shows">shows</a>
@@ -37,7 +37,7 @@
                     </button>
                     <!-- Mobile Menu -->
                     <nav x-cloak x-show="mobileMenuIsOpen" x-transition:enter="transition motion-reduce:transition-none ease-out duration-300" x-transition:enter-start="-translate-y-full" x-transition:enter-end="translate-y-0" x-transition:leave="transition motion-reduce:transition-none ease-out duration-300" x-transition:leave-start="translate-y-0" x-transition:leave-end="-translate-y-full" id="mobileMenu" class="fixed inset-x-0 top-0 z-10 flex max-h-svh flex-col items-center divide-y divide-cornorange overflow-y-auto rounded-b-xl border-b border-cornpurple bg-gray-950 px-6 pb-6 pt-20 font-alba text-4xl md:hidden">
-                        <a href="/">home</a>
+                        <a href="#home">home</a>
                         <a href="#news">news</a>
                         <a href="#about">about</a>
                         <a href="#shows">shows</a>
@@ -48,16 +48,16 @@
                 <div class="mb-1 mt-3 h-2 w-screen bg-cornorange md:mt-12 lg:mt-5"></div>
                 <div class="mb-3 h-2 w-screen bg-cornpurple md:mb-24 lg:mb-3"></div>
             </div>
-            <a href="/" class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-[396.5px]"><img class="" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
+            <a href="#home" class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-[396.5px]"><img class="" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
             <div x-data="{page: location.hash}" @hashchange.window="page = location.hash" class="grid max-w-[90%] lg:max-w-full lg:grid-cols-12">
                 <img class="sticky top-0 -z-10 hidden max-w-2xl lg:col-span-4 lg:col-start-1 lg:inline-block" src="./images/corn/theGuyz.png" alt="the guys in the band" />
-                <div x-cloak x-show="page === ''" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
+                <div x-cloak x-show="page === '#home' || page === ''" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
                     <!-- home -->
                     <img class="mb-8 lg:col-span-2 lg:col-start-2 lg:justify-self-end" src="./images/corn/bandOnStage.png" alt="band on stage" />
                     <p class="w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Unicornicopia is a Bay Area rock band who drink a lot of whiskey and quote Wayne's World too much. We're available for bar gigs, state fairs, farmers markets and bah mitzvahs.</p>
                     <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">For more information see the links (above). Socials below (duh).</p>
                     <section class="lg:col-start-3 lg:min-w-[352px] lg:justify-self-end">
-                        <div class="my-8 flex justify-center gap-2">
+                        <div class="my-8 flex justify-center gap-2 cursor-pointer">
                             <a href="https://www.youtube.com/@unicornicopia1330" target="_blank">
                                 <img src="./images/social-logos/youtube.png" alt="youtube logo" class="h-12 w-12 md:h-14 md:w-14" />
                             </a>
@@ -126,14 +126,16 @@
                     'https://www.youtube.com/embed/bmxkZgitBTs?si=pB-HJoYD3Q947tWJ',
                     'https://www.youtube.com/embed/GYFIILo-GxU?si=CDXRO10AhjAzGbIA',
                     'https://www.youtube.com/embed/zo8sew2qX9Y?si=wpdYywdxrNStoj65',
-                    'https://www.youtube.com/embed/kfkXIaW5jt0?si=oYR3WPJ8QMdfYH-U',
+                    'https://www.youtube.com/embed/kfkXIIaW5jt0?si=oYR3WPJ8QMdfYH-U',
                 ] 
                 }"
                     class="grid justify-items-center gap-y-16 lg:col-span-6 lg:col-start-6"
                 >
                 <!-- videos -->
                     <template x-for="embedLink in embedLinks">
-                        <iframe width="560" height="315" :src="embedLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="aspect-video w-full max-w-[560px]">
+                            <iframe :src="embedLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="h-full w-full"></iframe>
+                        </div>
                     </template>
                 </div>
             </div>
