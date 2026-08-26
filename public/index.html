@@ -3,140 +3,603 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Unicornicopia</title>
+        <meta
+            name="description"
+            content="Unicornicopia is a Bay Area rock band. First studio album Smell No Evil is out now. Semi-permanent hiatus. Permanent riffs."
+        />
+        <meta property="og:title" content="Unicornicopia" />
+        <meta
+            property="og:description"
+            content="Bay Area rock band. Smell No Evil is out now. Semi-permanent hiatus. Permanent riffs."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.unicornicopia.rocks/" />
+        <meta property="og:image" content="https://www.unicornicopia.rocks/images/news/og.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="canonical" href="https://www.unicornicopia.rocks/" />
+        <link rel="icon" href="./favicon.ico" sizes="any" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./images/favicons/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="./images/favicons/favicon-16x16.png"
+        />
         <link href="./output.css" rel="stylesheet" />
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <style>
             [x-cloak] {
                 display: none !important;
             }
+            html.show-home #view-home {
+                display: block !important;
+            }
         </style>
-        <title>Unicornicopia</title>
+        <script>
+            if ("scrollRestoration" in history) {
+                history.scrollRestoration = "manual";
+            }
+            if (!location.hash || location.hash === "#home") {
+                document.documentElement.classList.add("show-home");
+            }
+            window.addEventListener("load", () => window.scrollTo(0, 0));
+            document.addEventListener("alpine:init", () => {
+                Alpine.data("bandSite", () => ({
+                    page: "home",
+                    mobileMenuIsOpen: false,
+                    titles: {
+                        home: "Unicornicopia",
+                        news: "News · Unicornicopia",
+                        about: "About · Unicornicopia",
+                        shows: "Shows · Unicornicopia",
+                        videos: "Videos · Unicornicopia",
+                    },
+                    init() {
+                        this.syncPage(true);
+                        document.documentElement.classList.remove("show-home");
+                        window.scrollTo(0, 0);
+                    },
+                    go(name) {
+                        const hash = "#" + name;
+                        if (location.hash !== hash) {
+                            history.pushState(null, "", hash);
+                        }
+                        this.apply(name);
+                    },
+                    syncPage(replaceUnknown) {
+                        const name = (location.hash || "#home").replace("#", "");
+                        const page = this.titles[name] ? name : "home";
+                        if (replaceUnknown && name && !this.titles[name]) {
+                            history.replaceState(null, "", "#home");
+                        }
+                        this.apply(page);
+                    },
+                    apply(name) {
+                        this.page = name;
+                        document.title = this.titles[name];
+                        this.mobileMenuIsOpen = false;
+                        window.scrollTo(0, 0);
+                    },
+                }));
+            });
+        </script>
+        <script defer src="./js/alpine.min.js"></script>
     </head>
-    <body class="bg-black font-teko text-white antialiased">
-        <div class="flex flex-col items-center justify-center overflow-visible">
-            <div class="sticky top-0 bg-black md:static">
-                <a href="#home" class="inline-block"><img class="-mb-4 ml-4 mt-1 w-12 md:hidden lg:absolute lg:-top-8 lg:left-[420px] lg:mb-0 lg:ml-0 lg:inline-block lg:min-w-56" src="./images/corn/horseHeadLogo.png" alt="unicorn head logo" /></a>
-                <header x-data="{ mobileMenuIsOpen: false }" @click.away="mobileMenuIsOpen = false" class="w-full">
-                    <!-- Desktop Menu -->
-                    <nav class="hidden items-center font-alba text-4xl md:flex md:justify-around lg:justify-end lg:gap-10">
-                        <a href="#home">home</a>
-                        <a href="#news">news</a>
-                        <a href="#about">about</a>
-                        <a href="#shows">shows</a>
-                        <a href="#videos">videos</a>
-                        <a href="mailto:unicornicopiasf@gmail.com" target="_blank" class="lg:mr-11">contact</a>
+    <body
+        class="bg-black font-teko text-white antialiased"
+        x-data="bandSite"
+        @hashchange.window="syncPage(true)"
+        @popstate.window="syncPage(false)"
+        @keydown.escape.window="mobileMenuIsOpen = false"
+        :class="mobileMenuIsOpen && 'overflow-hidden'"
+    >
+        <a
+            href="#content"
+            class="skip-link"
+            @click.prevent="$refs.content.focus()"
+        >
+            Skip to content
+        </a>
+
+        <div class="relative flex w-full flex-col items-center justify-center overflow-visible">
+            <div
+                class="sticky top-0 z-30 w-full bg-black md:static md:z-auto"
+                @click.outside="mobileMenuIsOpen = false"
+            >
+                <div class="stage">
+                <a href="#home" class="inline-block md:hidden xl:inline-block" @click.prevent="go('home')">
+                    <img
+                        class="-mb-4 ml-4 mt-1 w-12 max-w-none md:hidden xl:absolute xl:-top-8 xl:left-[420px] xl:z-40 xl:mb-0 xl:ml-0 xl:inline-block xl:min-w-56"
+                        src="./images/corn/horseHeadLogo.png"
+                        alt="Unicornicopia"
+                        width="346"
+                        height="414"
+                    />
+                </a>
+                <header class="w-full">
+                    <nav
+                        class="hidden items-center font-alba text-4xl md:flex md:justify-around md:pt-6 xl:justify-end xl:gap-10 xl:pt-0 4xl:pr-48"
+                        aria-label="Primary"
+                    >
+                        <a
+                            href="#home"
+                            class="nav-link"
+                            :class="page === 'home' && 'text-cornorange hover:text-cornorange'"
+                            :aria-current="page === 'home' ? 'page' : false"
+                            @click.prevent="go('home')"
+                        >home</a>
+                        <a
+                            href="#news"
+                            class="nav-link"
+                            :class="page === 'news' && 'text-cornorange hover:text-cornorange'"
+                            :aria-current="page === 'news' ? 'page' : false"
+                            @click.prevent="go('news')"
+                        >news</a>
+                        <a
+                            href="#about"
+                            class="nav-link"
+                            :class="page === 'about' && 'text-cornorange hover:text-cornorange'"
+                            :aria-current="page === 'about' ? 'page' : false"
+                            @click.prevent="go('about')"
+                        >about</a>
+                        <a
+                            href="#shows"
+                            class="nav-link"
+                            :class="page === 'shows' && 'text-cornorange hover:text-cornorange'"
+                            :aria-current="page === 'shows' ? 'page' : false"
+                            @click.prevent="go('shows')"
+                        >shows</a>
+                        <a
+                            href="#videos"
+                            class="nav-link"
+                            :class="page === 'videos' && 'text-cornorange hover:text-cornorange'"
+                            :aria-current="page === 'videos' ? 'page' : false"
+                            @click.prevent="go('videos')"
+                        >videos</a>
+                        <a
+                            href="https://unicornicopia.creator-spring.com/"
+                            class="nav-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >merch</a>
+                        <a href="mailto:unicornicopiasf@gmail.com" class="nav-link xl:mr-11">contact</a>
                     </nav>
-                    <!-- Mobile Menu Button -->
-                    <button @click="mobileMenuIsOpen = !mobileMenuIsOpen" @click.outside="mobileMenuIsOpen = false" :aria-expanded="mobileMenuIsOpen" type="button" class="fixed right-6 top-6 z-20 flex text-slate-700 md:hidden dark:text-slate-300" aria-label="mobile menu" aria-controls="mobileMenu">
-                        <svg x-cloak x-show="!mobileMenuIsOpen" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    <button
+                        type="button"
+                        class="fixed right-6 top-6 z-50 flex h-11 w-11 items-center justify-center rounded-md bg-cornorange text-black md:hidden"
+                        @click="mobileMenuIsOpen = !mobileMenuIsOpen"
+                        :aria-expanded="mobileMenuIsOpen"
+                        aria-controls="mobileMenu"
+                        :aria-label="mobileMenuIsOpen ? 'Close menu' : 'Open menu'"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            aria-hidden="true"
+                            viewBox="0 0 24 24"
+                            stroke-width="2.2"
+                            stroke="currentColor"
+                            width="28"
+                            height="28"
+                            class="h-7 w-7"
+                            x-show="!mobileMenuIsOpen"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                            />
                         </svg>
-                        <svg x-cloak x-show="mobileMenuIsOpen" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            aria-hidden="true"
+                            viewBox="0 0 24 24"
+                            stroke-width="2.2"
+                            stroke="currentColor"
+                            width="28"
+                            height="28"
+                            class="h-7 w-7"
+                            x-cloak
+                            x-show="mobileMenuIsOpen"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18 18 6M6 6l12 12"
+                            />
                         </svg>
                     </button>
-                    <!-- Mobile Menu -->
-                    <nav x-cloak x-show="mobileMenuIsOpen" x-transition:enter="transition motion-reduce:transition-none ease-out duration-300" x-transition:enter-start="-translate-y-full" x-transition:enter-end="translate-y-0" x-transition:leave="transition motion-reduce:transition-none ease-out duration-300" x-transition:leave-start="translate-y-0" x-transition:leave-end="-translate-y-full" id="mobileMenu" class="fixed inset-x-0 top-0 z-10 flex max-h-svh flex-col items-center divide-y divide-cornorange overflow-y-auto rounded-b-xl border-b border-cornpurple bg-gray-950 px-6 pb-6 pt-20 font-alba text-4xl md:hidden">
-                        <a href="#home">home</a>
-                        <a href="#news">news</a>
-                        <a href="#about">about</a>
-                        <a href="#shows">shows</a>
-                        <a href="#videos">videos</a>
-                        <a href="mailto:unicornicopiasf@gmail.com" target="_blank" class="lg:mr-11">contact</a>
+                    <nav
+                        x-cloak
+                        x-show="mobileMenuIsOpen"
+                        x-transition:enter="transition motion-reduce:transition-none ease-out duration-300"
+                        x-transition:enter-start="-translate-y-full"
+                        x-transition:enter-end="translate-y-0"
+                        x-transition:leave="transition motion-reduce:transition-none ease-out duration-300"
+                        x-transition:leave-start="translate-y-0"
+                        x-transition:leave-end="-translate-y-full"
+                        id="mobileMenu"
+                        class="fixed inset-0 z-40 flex flex-col items-center divide-y divide-cornorange overflow-y-auto bg-gray-950 px-6 pb-10 pt-24 font-alba text-4xl md:hidden"
+                        aria-label="Mobile"
+                    >
+                        <a href="#home" class="nav-link w-full py-4 text-center" :class="page === 'home' && 'text-cornorange hover:text-cornorange'" @click.prevent="go('home')">home</a>
+                        <a href="#news" class="nav-link w-full py-4 text-center" :class="page === 'news' && 'text-cornorange hover:text-cornorange'" @click.prevent="go('news')">news</a>
+                        <a href="#about" class="nav-link w-full py-4 text-center" :class="page === 'about' && 'text-cornorange hover:text-cornorange'" @click.prevent="go('about')">about</a>
+                        <a href="#shows" class="nav-link w-full py-4 text-center" :class="page === 'shows' && 'text-cornorange hover:text-cornorange'" @click.prevent="go('shows')">shows</a>
+                        <a href="#videos" class="nav-link w-full py-4 text-center" :class="page === 'videos' && 'text-cornorange hover:text-cornorange'" @click.prevent="go('videos')">videos</a>
+                        <a
+                            href="https://unicornicopia.creator-spring.com/"
+                            class="nav-link w-full py-4 text-center"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            @click="mobileMenuIsOpen = false"
+                        >merch</a>
+                        <a
+                            href="mailto:unicornicopiasf@gmail.com"
+                            class="nav-link w-full py-4 text-center"
+                            @click="mobileMenuIsOpen = false"
+                        >contact</a>
                     </nav>
                 </header>
-                <div class="mb-1 mt-3 h-2 w-screen bg-cornorange md:mt-12 lg:mt-5"></div>
-                <div class="mb-3 h-2 w-screen bg-cornpurple md:mb-24 lg:mb-3"></div>
-            </div>
-            <a href="#home" class="absolute top-[4.7rem] hidden md:inline-block lg:left-10 lg:top-12 lg:w-[396.5px]"><img class="" src="./images/corn/wonkaLogo.png" alt="unicornicopia wonka logo" /></a>
-            <div x-data="{page: location.hash}" @hashchange.window="page = location.hash" class="grid max-w-[90%] md:max-w-full lg:grid-cols-12">
-                <img class="sticky top-0 -z-10 hidden max-w-2xl lg:col-span-4 lg:col-start-1 lg:inline-block" src="./images/corn/theGuyz.png" alt="the guys in the band" />
-                <div x-cloak x-show="page === '#home' || page === ''" class="grid justify-items-center lg:col-span-6 lg:col-start-6">
-                    <!-- home -->
-                    <img class="mb-8 lg:col-span-2 lg:col-start-2 lg:justify-self-end" src="./images/corn/bandOnStage.png" alt="band on stage" />
-                    <p class="w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">Unicornicopia is a Bay Area rock band who drink a lot of whiskey and quote Wayne's World too much. We're available for bar gigs, state fairs, farmers markets and bah mitzvahs.</p>
-                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:col-span-2 lg:col-start-2 lg:justify-self-end lg:text-3xl">For more information see the links (above). Socials below (duh).</p>
-                    <section class="lg:col-start-3 lg:min-w-[352px] lg:justify-self-end">
-                        <div class="my-8 flex justify-center gap-2 cursor-pointer">
-                            <a href="https://www.youtube.com/@unicornicopia1330" target="_blank">
-                                <img src="./images/social-logos/youtube.png" alt="youtube logo" class="h-12 w-12 md:h-14 md:w-14" />
-                            </a>
-                            <a href="https://music.amazon.com/albums/B08CRYS7TW?ref=dm_sh_8CoYSkoE1pUpo9wdLYYnISGhW" target="_blank">
-                                <img src="./images/social-logos/amus.png" alt="amazon logo" class="h-12 w-12 md:h-14 md:w-14" />
-                            </a>
-                            <a href="https://open.spotify.com/artist/6U9cWuYVr1KAsQSVUq3ivl?si=QeAvPG0xSBa2xsBqVDuB1A" target="_blank">
-                                <img src="./images/social-logos/spotify.png" alt="spotify logo" class="h-12 w-12 md:h-14 md:w-14" />
-                            </a>
-                            <a href="https://www.facebook.com/unicornicopiaSF" target="_blank">
-                                <img src="./images/social-logos/fbook.png" alt="facebook logo" class="h-12 w-12 md:h-14 md:w-14" />
-                            </a>
-                            <a href="https://www.instagram.com/unicornicopiasf" target="_blank">
-                                <img src="./images/social-logos/gram.png" alt="instagram logo" class="h-12 w-12 scale-[1.14] md:h-14 md:w-14" />
-                            </a>
-                        </div>
-                    </section>
-                </div>
-                <div x-cloak x-show="page === '#news'" class="grid lg:col-span-6 lg:col-start-6 lg:grid-rows-[min-content_min-content_min-content]">
-                    <!-- news -->
-                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:mb-1 lg:justify-self-end lg:text-3xl">First Studio Album 'Smell No Evil' Coming Late 2024!</p>
-                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:justify-self-end lg:text-3xl">Stay Tuned...</p>
-                </div>
-                <div x-cloak x-show="page === '#about'" class="grid gap-16 lg:col-span-7 lg:col-start-5">
-                    <!-- about -->
-                    <h1 class="left-[660.5px] my-3 text-5xl md:my-8 lg:absolute">Unicornicopia is...</h1>
-                    <div class="flex flex-col items-center gap-4 md:block lg:mt-44">
-                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-gray-800 object-cover shape-outside-circle" src="./images/corn/proColeG.jpg" alt="coleman" />
-                        <span class="flex flex-col items-center md:block">
-                            <span class="text-4xl text-gray-400">Cubic Zirconia Cole Musselamn</span>
-                            <p class="text-2xl">Big Gulps, huh guys? This sexy Jim Carrey lookalike is Cole "Muscle Man" Musselman. The baddest frontman on the planet for the world's most dangerous band. All the shine of diamond at a fraction of the price. Handling vocals, guitar, and more than his fair share of groupies. The Coleman Cometh!</p>
-                        </span>
-                    </div>
-                    <div class="flex flex-col items-center gap-4 md:block">
-                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-gray-800 object-cover object-top shape-outside-circle" src="./images/corn/proChrisG.jpg" alt="rebbert" />
-                        <span class="flex flex-col items-center md:block">
-                            <span class="text-4xl text-gray-400">Cautious Chris Rebbert</span>
-                            <p class="text-2xl">It's not just a clever name - Cautious Chrissy is a huge Sissy, but he sure can play those drums. Don't let those long, wild locks and sleeves of tattoos fool you, this guy's got a fluffy Pomeranian at home and spends most of his time reading and writing like a nerd. Luckily this lanky Looney Tune has enough rock and roll vices and talent on the skins to round out the band.</p>
-                        </span>
-                    </div>
-                    <div class="flex flex-col items-center gap-4 md:block">
-                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-gray-800 object-cover shape-outside-circle" src="./images/corn/proTheo.png" alt="theo" />
-                        <span class="flex flex-col items-center md:block">
-                            <span class="text-4xl text-gray-400">Theo the Thunder Spielman</span>
-                            <p class="text-2xl">Hailing from parts unknown with a pedalboard so big and solos so electric you'd swear he just slapped some strings on Mjolnir itself. Even if that's not the case, you can be sure that if Mjonir was a guitar, this kooky kid would certainly be worthy of wielding it. And who doesn't love it when he whips out those fun little soundbytes on stage? Where does he get those wonderful toys?</p>
-                        </span>
-                    </div>
-                    <!-- <div class="mb-10 flex flex-col items-center gap-4 md:block">
-                        <img class="float-left mr-4 h-52 w-52 rounded-full border-8 border-gray-800 object-cover object-top shape-outside-circle" src="./images/corn/proYou.png" alt="you?" />
-                        <span class="flex flex-col items-center md:block">
-                            <span class="text-4xl text-gray-400">You?</span>
-                            <p class="text-2xl">Unicornicopia is currently looking for a killer bassist who can round out the sound and hang with the gang. All are welcome to apply, but if you like whiskey and misbehaving wellinto your forties, you're more likely to have a good time with us. Worth mentioning that our previous bassist - Travis "The Trashman" Dickey - wrote some killer basslines that we've kind of fallen in love with. New bassists will both respect the legacy Travis has built with us (with a little bit of their own flavor sprinkled in), but also help us forge the future of Unicornicopia.</p>
-                        </span>
-                    </div> -->
-                </div>
-                <div x-cloak x-show="page === '#shows'" class="grid lg:col-span-6 lg:col-start-6 lg:grid-rows-[min-content_min-content_min-content]">
-                    <!-- shows -->
-                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:mb-1 lg:justify-self-end lg:text-3xl">good things are coming....</p>
-                    <p class="mt-4 w-full max-w-[90%] px-4 text-2xl md:max-w-[80%] lg:justify-self-end lg:text-3xl">good things</p>
-                </div>
-                <div
-                    x-cloak
-                    x-show="page === '#videos'"
-                    x-data="{
-                    embedLinks:[
-                    'https://www.youtube.com/embed/bmxkZgitBTs?si=pB-HJoYD3Q947tWJ',
-                    'https://www.youtube.com/embed/GYFIILo-GxU?si=CDXRO10AhjAzGbIA',
-                    'https://www.youtube.com/embed/zo8sew2qX9Y?si=wpdYywdxrNStoj65',
-                ] 
-                }"
-                    class="grid justify-items-center gap-y-16 lg:col-span-6 lg:col-start-6"
+                <a
+                    href="#home"
+                    class="absolute top-[4.7rem] z-40 hidden md:left-1/2 md:inline-block md:-translate-x-1/2 xl:left-10 xl:top-12 xl:w-[396.5px] xl:translate-x-0"
+                    @click.prevent="go('home')"
                 >
-                <!-- videos -->
-                    <template x-for="embedLink in embedLinks">
-                        <div class="aspect-video w-full max-w-sm md:max-w-[560px]">
-                            <iframe :src="embedLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="h-full w-full"></iframe>
+                    <img
+                        class="h-auto w-[589px] max-w-none xl:w-full"
+                        src="./images/corn/wonkaLogo.png"
+                        alt="Unicornicopia"
+                        width="589"
+                        height="133"
+                    />
+                </a>
+                </div>
+                <div class="mb-1 mt-3 h-2 w-full bg-cornorange md:mt-12 xl:mt-5"></div>
+                <div class="mb-3 h-2 w-full bg-cornpurple md:mb-24 xl:mb-3"></div>
+            </div>
+
+            <div class="stage">
+            <main
+                id="content"
+                x-ref="content"
+                tabindex="-1"
+                class="mx-auto grid w-full min-w-0 max-w-[90%] md:max-w-full xl:grid-cols-12"
+            >
+                <img
+                    class="sticky top-0 -z-10 hidden max-w-xl xl:col-span-4 xl:col-start-1 xl:inline-block 2xl:max-w-2xl"
+                    src="./images/corn/theGuyz.webp"
+                    alt="Unicornicopia playing live"
+                    width="861"
+                    height="975"
+                />
+
+                <div class="min-w-0 xl:col-span-6 xl:col-start-6">
+                <section
+                    id="view-home"
+                    x-cloak
+                    x-show="page === 'home'"
+                    class="grid justify-items-center"
+                >
+                    <img
+                        src="./images/corn/bandOnStage.webp"
+                        alt="Unicornicopia on stage"
+                        width="689"
+                        height="489"
+                        fetchpriority="high"
+                        class="mb-8 xl:col-span-2 xl:col-start-1 xl:justify-self-start"
+                    />
+                    <p class="page-copy w-full max-w-[90%] px-4 md:max-w-[80%] xl:col-span-2 xl:col-start-1 xl:justify-self-start">
+                        Unicornicopia is a Bay Area rock band who drink a lot of whiskey and quote
+                        Wayne's World too much.
+                    </p>
+                    <p class="page-copy mt-4 w-full max-w-[90%] px-4 md:max-w-[80%] xl:col-span-2 xl:col-start-1 xl:justify-self-start">
+                        Our first studio album, Smell No Evil, is out now. We're on a semi-permanent
+                        hiatus from the stage, so bar gigs, state fairs, farmers markets, and bar
+                        mitzvahs will have to live without us for a while.
+                    </p>
+                    <p class="page-copy mt-4 w-full max-w-[90%] px-4 md:max-w-[80%] xl:col-span-2 xl:col-start-1 xl:justify-self-start">
+                        For more information see the links (above). Socials below (duh).
+                    </p>
+                    <ul class="my-8 flex flex-wrap items-center justify-center gap-3 xl:col-start-1 xl:justify-self-start">
+                        <li>
+                            <a
+                                href="https://www.youtube.com/@unicornicopia1330"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    src="./images/social-logos/youtube.png"
+                                    alt="YouTube"
+                                    width="56"
+                                    height="56"
+                                    class="h-12 w-12 md:h-14 md:w-14"
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://music.amazon.com/albums/B0DVBFXP4C"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    src="./images/social-logos/amus.png"
+                                    alt="Amazon Music"
+                                    width="56"
+                                    height="56"
+                                    class="h-12 w-12 md:h-14 md:w-14"
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://open.spotify.com/artist/6U9cWuYVr1KAsQSVUq3ivl"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    src="./images/social-logos/spotify.png"
+                                    alt="Spotify"
+                                    width="56"
+                                    height="56"
+                                    class="h-12 w-12 md:h-14 md:w-14"
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.facebook.com/unicornicopiaSF"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    src="./images/social-logos/fbook.png"
+                                    alt="Facebook"
+                                    width="56"
+                                    height="56"
+                                    class="h-12 w-12 md:h-14 md:w-14"
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.instagram.com/unicornicopiasf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    src="./images/social-logos/gram.png"
+                                    alt="Instagram"
+                                    width="56"
+                                    height="56"
+                                    class="h-12 w-12 scale-[1.14] md:h-14 md:w-14"
+                                />
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <section
+                    id="view-news"
+                    x-cloak
+                    x-show="page === 'news'"
+                    class="mx-auto flex w-full max-w-3xl flex-col gap-6 xl:mx-0 xl:max-w-none"
+                >
+                    <h1 class="page-title">Smell No Evil is out</h1>
+                    <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
+                        <img
+                            src="./images/news/smell-no-evil.webp"
+                            alt="Smell No Evil album cover: a unicorn head drawn in white powder"
+                            width="800"
+                            height="800"
+                            class="w-48 shrink-0 rounded-md sm:w-52 xl:w-64"
+                        />
+                        <div class="flex min-w-0 flex-col gap-4">
+                            <p class="page-copy">
+                                Eight tracks of whiskey-fueled grunge — including Shoulder, which
+                                showed up in
+                                <a
+                                    class="copy-link whitespace-nowrap"
+                                    href="https://adhocstudio.com/games/dispatch"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >Dispatch</a>
+                                (the game from
+                                <a
+                                    class="copy-link whitespace-nowrap"
+                                    href="https://adhocstudio.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >AdHoc Studio</a>).
+                            </p>
+                            <p class="page-copy">Listen:</p>
+                            <ul class="flex flex-wrap gap-x-6 gap-y-2">
+                                <li>
+                                    <a
+                                        class="listen-link"
+                                        href="https://open.spotify.com/album/0j8ZYoFFkxL0eeH5TCizs1"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >Spotify</a>
+                                </li>
+                                <li>
+                                    <a
+                                        class="listen-link"
+                                        href="https://music.apple.com/us/album/smell-no-evil/1793251647"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >Apple Music</a>
+                                </li>
+                                <li>
+                                    <a
+                                        class="listen-link"
+                                        href="https://www.youtube.com/playlist?list=OLAK5uy_lJbeofe8hw0YBH7t83fba_tJrVv7k61N0"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >YouTube</a>
+                                </li>
+                                <li>
+                                    <a
+                                        class="listen-link"
+                                        href="https://music.amazon.com/albums/B0DVBFXP4C"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >Amazon Music</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section
+                    id="view-about"
+                    x-cloak
+                    x-show="page === 'about'"
+                    class="mx-auto flex w-full max-w-3xl flex-col gap-14 xl:mx-0 xl:max-w-none"
+                >
+                    <h1 class="page-title">Unicornicopia is...</h1>
+
+                    <article class="flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-6">
+                        <img
+                            class="h-52 w-52 shrink-0 rounded-full border-8 border-gray-800 object-cover"
+                            src="./images/corn/proCole.webp"
+                            alt="Cole Musselman"
+                            width="800"
+                            height="600"
+                            loading="lazy"
+                        />
+                        <div class="min-w-0">
+                            <h2 class="text-center text-3xl text-gray-400 md:text-left md:text-4xl">
+                                Cubic Zirconia Cole Musselman
+                            </h2>
+                            <p class="page-copy mt-2 text-center md:text-left">
+                                Big Gulps, huh guys? This sexy Jim Carrey lookalike is Cole "Muscle
+                                Man" Musselman. The baddest frontman on the planet for the world's
+                                most dangerous band. All the shine of diamond at a fraction of the
+                                price. Handling vocals, guitar, and more than his fair share of
+                                groupies. The Coleman Cometh!
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-6">
+                        <img
+                            class="h-52 w-52 shrink-0 rounded-full border-8 border-gray-800 object-cover object-top"
+                            src="./images/corn/proChris.webp"
+                            alt="Chris Rebbert"
+                            width="675"
+                            height="1200"
+                            loading="lazy"
+                        />
+                        <div class="min-w-0">
+                            <h2 class="text-center text-3xl text-gray-400 md:text-left md:text-4xl">
+                                Cautious Chris Rebbert
+                            </h2>
+                            <p class="page-copy mt-2 text-center md:text-left">
+                                It's not just a clever name — Cautious Chrissy is a huge Sissy, but
+                                he sure can play those drums. Don't let those long, wild locks and
+                                sleeves of tattoos fool you, this guy's got a fluffy Pomeranian at
+                                home and spends most of his time reading and writing like a nerd.
+                                Luckily this lanky Looney Tune has enough rock and roll vices and
+                                talent on the skins to round out the band.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-6">
+                        <img
+                            class="h-52 w-52 shrink-0 rounded-full border-8 border-gray-800 object-cover"
+                            src="./images/corn/proTheo.webp"
+                            alt="Theo Spielman"
+                            width="800"
+                            height="794"
+                            loading="lazy"
+                        />
+                        <div class="min-w-0">
+                            <h2 class="text-center text-3xl text-gray-400 md:text-left md:text-4xl">
+                                Theo the Thunder Spielman
+                            </h2>
+                            <p class="page-copy mt-2 text-center md:text-left">
+                                Hailing from parts unknown with a pedalboard so big and solos so
+                                electric you'd swear he just slapped some strings on Mjolnir itself.
+                                Even if that's not the case, you can be sure that if Mjolnir was a
+                                guitar, this kooky kid would certainly be worthy of wielding it. And
+                                who doesn't love it when he whips out those fun little soundbites on
+                                stage? Where does he get those wonderful toys?
+                            </p>
+                        </div>
+                    </article>
+                </section>
+
+                <section
+                    id="view-shows"
+                    x-cloak
+                    x-show="page === 'shows'"
+                    class="mx-auto flex w-full max-w-3xl flex-col gap-4 xl:mx-0 xl:max-w-none"
+                >
+                    <h1 class="page-title">semi-permanent hiatus</h1>
+                    <p class="page-copy">
+                        No upcoming shows. We're not broken up, and we're not teasing a comeback.
+                        The world's most dangerous band is just... parked.
+                    </p>
+                    <p class="page-copy">
+                        Smell No Evil is out if you want Unicornicopia in your ears. If we ever plug
+                        back in, this page will stop looking so calm.
+                    </p>
+                </section>
+
+                <section
+                    id="view-videos"
+                    x-cloak
+                    x-show="page === 'videos'"
+                    class="mx-auto flex w-full max-w-3xl flex-col gap-12 xl:mx-0 xl:max-w-none"
+                >
+                    <h1 class="page-title">videos</h1>
+                    <template x-if="page === 'videos'">
+                        <div class="flex w-full flex-col gap-12">
+                            <div class="aspect-video w-full max-w-3xl">
+                                <iframe
+                                    src="https://www.youtube-nocookie.com/embed/bmxkZgitBTs"
+                                    title="Unicornicopia video"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allowfullscreen
+                                    class="h-full w-full"
+                                ></iframe>
+                            </div>
+                            <div class="aspect-video w-full max-w-3xl">
+                                <iframe
+                                    src="https://www.youtube-nocookie.com/embed/GYFIILo-GxU"
+                                    title="Unicornicopia video"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allowfullscreen
+                                    class="h-full w-full"
+                                ></iframe>
+                            </div>
+                            <div class="aspect-video w-full max-w-3xl">
+                                <iframe
+                                    src="https://www.youtube-nocookie.com/embed/zo8sew2qX9Y"
+                                    title="Unicornicopia video"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allowfullscreen
+                                    class="h-full w-full"
+                                ></iframe>
+                            </div>
                         </div>
                     </template>
+                </section>
                 </div>
+            </main>
             </div>
         </div>
     </body>

@@ -3,49 +3,81 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'alba_matter';
-  src: url('./fonts/alba.matter-webfont.woff2') format('woff2'),
-       url('./fonts/alba.matter-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+    font-family: "alba_matter";
+    src:
+        url("./fonts/alba.matter-webfont.woff2") format("woff2"),
+        url("./fonts/alba.matter-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'tekoregular';
-  src: url('./fonts/teko-regular-webfont.woff2') format('woff2'),
-       url('./fonts/teko-regular-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+    font-family: "tekoregular";
+    src:
+        url("./fonts/teko-regular-webfont.woff2") format("woff2"),
+        url("./fonts/teko-regular-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
-@font-face {
-  font-family: 'tekolight';
-  src: url('./fonts/teko-light-webfont.woff2') format('woff2'),
-       url('./fonts/teko-light-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+@layer base {
+    html {
+        color-scheme: dark;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    iframe {
+        max-width: 100%;
+    }
 }
 
-@font-face {
-  font-family: 'tekomedium';
-  src: url('./fonts/teko-medium-webfont.woff2') format('woff2'),
-       url('./fonts/teko-medium-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+@layer components {
+    .nav-link {
+        @apply rounded-sm px-1 hover:text-cornpurple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cornpurple;
+    }
 
-@font-face {
-  font-family: 'tekosemibold';
-  src: url('./fonts/teko-semibold-webfont.woff2') format('woff2'),
-       url('./fonts/teko-semibold-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+    .skip-link {
+        @apply sr-only;
+    }
 
-@font-face {
-  font-family: 'tekobold';
-  src: url('./fonts/teko-bold-webfont.woff2') format('woff2'),
-       url('./fonts/teko-bold-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+    .skip-link:focus {
+        clip: auto;
+        position: fixed;
+        left: 1rem;
+        top: 1rem;
+        z-index: 50;
+        width: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        padding: 0.5rem 0.75rem;
+        background-color: #000;
+        color: theme("colors.cornorange");
+    }
+
+    .page-title {
+        @apply max-w-full font-alba text-3xl text-cornorange break-words sm:text-4xl md:text-5xl;
+    }
+
+    .page-copy {
+        @apply w-full max-w-3xl text-xl leading-snug break-words sm:text-2xl lg:text-3xl;
+    }
+
+    .listen-link {
+        @apply font-alba text-2xl text-cornorange hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cornorange sm:text-3xl;
+    }
+
+    .copy-link {
+        @apply text-cornorange underline decoration-cornorange/50 underline-offset-4 hover:text-white hover:decoration-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cornorange;
+    }
+
+    .stage {
+        @apply relative w-full 4xl:mx-auto 4xl:max-w-[2200px];
+    }
 }
