@@ -53,6 +53,10 @@
                 Alpine.data("bandSite", () => ({
                     page: "home",
                     mobileMenuIsOpen: false,
+                    isCloseIconShown: false,
+                    isMenuTabCollapsed: false,
+                    isMenuTabGrowing: false,
+                    menuCloseTimeout: null,
                     titles: {
                         home: "Unicornicopia",
                         news: "News · Unicornicopia",
@@ -64,6 +68,64 @@
                         this.syncPage(true);
                         document.documentElement.classList.remove("show-home");
                         window.scrollTo(0, 0);
+                    },
+                    prefersReducedMotion() {
+                        return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                    },
+                    openMenu() {
+                        clearTimeout(this.menuCloseTimeout);
+                        this.isMenuTabCollapsed = false;
+                        this.isMenuTabGrowing = false;
+                        this.isCloseIconShown = true;
+                        this.mobileMenuIsOpen = true;
+                    },
+                    closeMenu() {
+                        if (!this.mobileMenuIsOpen && !this.isCloseIconShown) {
+                            return;
+                        }
+                        this.mobileMenuIsOpen = false;
+                        this.isCloseIconShown = false;
+                        this.isMenuTabGrowing = false;
+                        if (this.prefersReducedMotion()) {
+                            this.isMenuTabCollapsed = false;
+                            return;
+                        }
+                        this.isMenuTabCollapsed = true;
+                        clearTimeout(this.menuCloseTimeout);
+                        this.menuCloseTimeout = setTimeout(() => this.finishMenuClose(), 450);
+                    },
+                    finishMenuClose() {
+                        if (!this.isMenuTabCollapsed) {
+                            return;
+                        }
+                        clearTimeout(this.menuCloseTimeout);
+                        this.isMenuTabCollapsed = false;
+                        this.isMenuTabGrowing = true;
+                    },
+                    onMenuTransitionEnd(event) {
+                        if (event.target !== event.currentTarget) {
+                            return;
+                        }
+                        if (event.propertyName && event.propertyName !== "transform") {
+                            return;
+                        }
+                        if (this.mobileMenuIsOpen) {
+                            return;
+                        }
+                        this.finishMenuClose();
+                    },
+                    onMenuTabAnimationEnd(event) {
+                        if (event.animationName !== "menu-tab-grow") {
+                            return;
+                        }
+                        this.isMenuTabGrowing = false;
+                    },
+                    toggleMenu() {
+                        if (this.mobileMenuIsOpen) {
+                            this.closeMenu();
+                        } else {
+                            this.openMenu();
+                        }
                     },
                     go(name) {
                         const hash = "#" + name;
@@ -83,7 +145,7 @@
                     apply(name) {
                         this.page = name;
                         document.title = this.titles[name];
-                        this.mobileMenuIsOpen = false;
+                        this.closeMenu();
                         window.scrollTo(0, 0);
                     },
                 }));
@@ -96,8 +158,8 @@
         x-data="bandSite"
         @hashchange.window="syncPage(true)"
         @popstate.window="syncPage(false)"
-        @keydown.escape.window="mobileMenuIsOpen = false"
-        :class="mobileMenuIsOpen && 'overflow-hidden'"
+        @keydown.escape.window="closeMenu()"
+        :class="(mobileMenuIsOpen || isMenuTabCollapsed) && 'overflow-hidden'"
     >
         <a
             href="#content"
@@ -110,7 +172,7 @@
         <div class="relative flex w-full flex-col items-center justify-center overflow-visible">
             <div
                 class="sticky top-0 z-30 w-full bg-black md:static md:z-auto"
-                @click.outside="mobileMenuIsOpen = false"
+                @click.outside="closeMenu()"
             >
                 <div class="stage">
                 <a href="#home" class="inline-block md:hidden xl:inline-block" @click.prevent="go('home')">
@@ -170,52 +232,6 @@
                         >merch</a>
                         <a href="mailto:unicornicopiasf@gmail.com" class="nav-link xl:mr-11">contact</a>
                     </nav>
-                    <button
-                        type="button"
-                        class="fixed right-6 top-6 z-50 flex h-11 w-11 items-center justify-center rounded-md bg-cornorange text-black md:hidden"
-                        @click="mobileMenuIsOpen = !mobileMenuIsOpen"
-                        :aria-expanded="mobileMenuIsOpen"
-                        aria-controls="mobileMenu"
-                        :aria-label="mobileMenuIsOpen ? 'Close menu' : 'Open menu'"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            aria-hidden="true"
-                            viewBox="0 0 24 24"
-                            stroke-width="2.2"
-                            stroke="currentColor"
-                            width="28"
-                            height="28"
-                            class="h-7 w-7"
-                            x-show="!mobileMenuIsOpen"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                            />
-                        </svg>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            aria-hidden="true"
-                            viewBox="0 0 24 24"
-                            stroke-width="2.2"
-                            stroke="currentColor"
-                            width="28"
-                            height="28"
-                            class="h-7 w-7"
-                            x-cloak
-                            x-show="mobileMenuIsOpen"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M6 18 18 6M6 6l12 12"
-                            />
-                        </svg>
-                    </button>
                     <nav
                         x-cloak
                         x-show="mobileMenuIsOpen"
@@ -225,6 +241,7 @@
                         x-transition:leave="transition motion-reduce:transition-none ease-out duration-300"
                         x-transition:leave-start="translate-y-0"
                         x-transition:leave-end="-translate-y-full"
+                        @transitionend="onMenuTransitionEnd($event)"
                         id="mobileMenu"
                         class="fixed inset-0 z-40 flex flex-col items-center divide-y divide-cornorange overflow-y-auto bg-gray-950 px-6 pb-10 pt-24 font-alba text-4xl md:hidden"
                         aria-label="Mobile"
@@ -239,12 +256,12 @@
                             class="nav-link w-full py-4 text-center"
                             target="_blank"
                             rel="noopener noreferrer"
-                            @click="mobileMenuIsOpen = false"
+                            @click="closeMenu()"
                         >merch</a>
                         <a
                             href="mailto:unicornicopiasf@gmail.com"
                             class="nav-link w-full py-4 text-center"
-                            @click="mobileMenuIsOpen = false"
+                            @click="closeMenu()"
                         >contact</a>
                     </nav>
                 </header>
@@ -262,7 +279,62 @@
                     />
                 </a>
                 </div>
-                <div class="mb-1 mt-3 h-2 w-full bg-cornorange md:mt-12 xl:mt-5"></div>
+                <div class="relative mb-1 mt-3 md:mt-12 xl:mt-5">
+                    <div class="h-2 w-full bg-cornorange"></div>
+                    <button
+                        type="button"
+                        class="menu-tab"
+                        :class="isMenuTabCollapsed && 'menu-tab-collapsed'"
+                        @click="toggleMenu()"
+                        @animationend="onMenuTabAnimationEnd($event)"
+                        :aria-expanded="mobileMenuIsOpen"
+                        aria-controls="mobileMenu"
+                        :aria-label="isCloseIconShown ? 'Close menu' : 'Open menu'"
+                    >
+                        <span
+                            class="menu-tab-face menu-tab-bar"
+                            :class="{ 'menu-tab-close': isCloseIconShown, 'menu-tab-grow': isMenuTabGrowing }"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                aria-hidden="true"
+                                viewBox="0 0 24 24"
+                                stroke-width="2.2"
+                                stroke="currentColor"
+                                width="20"
+                                height="20"
+                                class="h-5 w-5"
+                                x-show="!isCloseIconShown && !isMenuTabCollapsed"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                                />
+                            </svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                aria-hidden="true"
+                                viewBox="0 0 24 24"
+                                stroke-width="2.2"
+                                stroke="currentColor"
+                                width="20"
+                                height="20"
+                                class="h-5 w-5"
+                                x-cloak
+                                x-show="isCloseIconShown"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M6 18 18 6M6 6l12 12"
+                                />
+                            </svg>
+                        </span>
+                    </button>
+                </div>
                 <div class="mb-3 h-2 w-full bg-cornpurple md:mb-24 xl:mb-3"></div>
             </div>
 
