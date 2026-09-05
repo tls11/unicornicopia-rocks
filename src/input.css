@@ -82,7 +82,7 @@
     }
 
     .menu-tab {
-        @apply absolute bottom-0 right-2.5 z-50 flex h-11 w-11 items-end justify-center bg-transparent md:hidden;
+        @apply absolute bottom-0 right-2.5 z-50 flex h-14 w-11 flex-col items-center justify-end bg-transparent md:hidden;
     }
 
     .menu-tab:focus-visible {
@@ -90,8 +90,24 @@
         outline-offset: 2px;
     }
 
+    .menu-tab-horn {
+        display: block;
+        width: 0.62rem;
+        height: 1.15rem;
+        margin-bottom: -1px;
+        flex-shrink: 0;
+        color: theme("colors.cornorange");
+        pointer-events: none;
+    }
+
+    .menu-tab:has(.menu-tab-close) .menu-tab-horn {
+        visibility: hidden;
+        height: 0;
+        margin: 0;
+    }
+
     .menu-tab-face {
-        @apply flex h-9 w-8 items-center justify-center bg-cornorange text-black;
+        @apply relative flex h-9 w-8 items-center justify-center bg-cornorange text-black;
         transform-origin: bottom center;
     }
 
