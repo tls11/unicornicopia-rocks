@@ -25,6 +25,7 @@
 @layer base {
     html {
         color-scheme: dark;
+        scrollbar-gutter: stable;
     }
 
     img {
@@ -91,19 +92,34 @@
     }
 
     .menu-tab-horn {
-        display: block;
-        width: 0.62rem;
-        height: 1.15rem;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        width: 1.35rem;
+        height: 1.125rem;
         margin-bottom: -1px;
+        margin-left: -0.45rem;
+        overflow: hidden;
         flex-shrink: 0;
         color: theme("colors.cornorange");
         pointer-events: none;
+    }
+
+    .menu-tab-horn svg {
+        display: block;
+        width: 1.35rem;
+        height: 1.125rem;
+        flex-shrink: 0;
     }
 
     .menu-tab:has(.menu-tab-close) .menu-tab-horn {
         visibility: hidden;
         height: 0;
         margin: 0;
+    }
+
+    .menu-tab:has(.menu-tab-grow) .menu-tab-horn {
+        animation: menu-tab-horn-grow 0.22s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
     }
 
     .menu-tab-face {
@@ -157,9 +173,21 @@
     }
 }
 
+@keyframes menu-tab-horn-grow {
+    from {
+        height: 0;
+        margin-bottom: 0;
+    }
+    to {
+        height: 1.125rem;
+        margin-bottom: -1px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .menu-tab-grow,
-    .menu-tab-grow svg {
+    .menu-tab-grow svg,
+    .menu-tab:has(.menu-tab-grow) .menu-tab-horn {
         animation: none;
     }
 }

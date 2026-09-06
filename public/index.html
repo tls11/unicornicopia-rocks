@@ -100,6 +100,10 @@
                         }
                         clearTimeout(this.menuCloseTimeout);
                         this.isMenuTabCollapsed = false;
+                        if (this.prefersReducedMotion()) {
+                            this.isMenuTabGrowing = false;
+                            return;
+                        }
                         this.isMenuTabGrowing = true;
                     },
                     onMenuTransitionEnd(event) {
@@ -115,7 +119,7 @@
                         this.finishMenuClose();
                     },
                     onMenuTabAnimationEnd(event) {
-                        if (event.animationName !== "menu-tab-grow") {
+                        if (event.animationName !== "menu-tab-horn-grow") {
                             return;
                         }
                         this.isMenuTabGrowing = false;
@@ -186,7 +190,7 @@
                 </a>
                 <header class="w-full">
                     <nav
-                        class="hidden items-center font-alba text-4xl md:flex md:justify-around md:pt-6 xl:justify-end xl:gap-10 xl:pt-0 4xl:pr-48"
+                        class="hidden items-center font-alba text-4xl md:flex md:justify-around md:pt-6 xl:justify-end xl:gap-6 xl:pt-0 xl:text-[2rem] 2xl:text-4xl 3xl:gap-10 4xl:pr-48"
                         aria-label="Primary"
                     >
                         <a
@@ -230,7 +234,7 @@
                             target="_blank"
                             rel="noopener noreferrer"
                         >merch</a>
-                        <a href="mailto:unicornicopiasf@gmail.com" class="nav-link xl:mr-11">contact</a>
+                        <a href="mailto:unicornicopiasf@gmail.com" class="nav-link xl:mr-4 3xl:mr-11">contact</a>
                     </nav>
                     <nav
                         x-cloak
@@ -291,17 +295,14 @@
                         aria-controls="mobileMenu"
                         :aria-label="isCloseIconShown ? 'Close menu' : 'Open menu'"
                     >
-                        <svg
-                            class="menu-tab-horn"
-                            viewBox="0 0 16 28"
-                            aria-hidden="true"
-                            focusable="false"
-                        >
-                            <path
-                                fill="currentColor"
-                                d="M12.1.2 3.6 27.8h9.4Z"
-                            />
-                        </svg>
+                        <span class="menu-tab-horn" aria-hidden="true">
+                            <svg viewBox="0 0 24 20" focusable="false">
+                                <path
+                                    fill="currentColor"
+                                    d="M.8 1.6 13.4 19.2h6.2Z"
+                                />
+                            </svg>
+                        </span>
                         <span
                             class="menu-tab-face menu-tab-bar"
                             :class="{ 'menu-tab-close': isCloseIconShown, 'menu-tab-grow': isMenuTabGrowing }"
